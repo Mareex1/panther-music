@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panther Lounge Music Request</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 20px auto; }
+    .song { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .vote-btn { background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>🎶 Request a Song</h2>
+  <input type="text" id="songName" placeholder="Song Name" /><br/><br/>
+  <input type="text" id="artist" placeholder="Artist Name" /><br/><br/>
+  <button onclick="submitSong()">Submit</button>
+
+  <h3>🔥 Vote for Songs</h3>
+  <div id="songList"></div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzYBUy424rsbNWx34pdXtWzfHcQzrISzkCmdNLxtXEy3aQjnY8Welkgyoduk5XdpAHQDg/exec";
+    const sheetURL = "https://spreadsheets.google.com/feeds/list/2PACX-1vTjpodwYljcHrZh4qhXSYfYfEj6ARb31oSQAUXTOXc_1NEXdj0PQmlJTrT6YZFlF3b7d3shOTFiCukx/1/public/values?alt=json";
+
+    async function submitSong() {
+      const songName = document.getElementById("songName").value;
+      const artist = document.getElementById("artist").value;
+
+      if (!songName || !artist) {
+        alert("Please fill in both fields.");
+        return;
+      }
+
+      const data = { type: "submit", songName, artist };
+
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const result = await res.json();
+      alert("Song submitted!");
+      document.getElementById("songName").value = "";
+      document.getElementById("artist").value = "";
+      loadSongs(); // reload list
+    }
+
+    async function vote(songID) {
+      const data = { type: "vote", songID };
+
+      await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      alert("Thanks for voting!");
+      loadSongs(); // reload list
+    }
+
+    async function loadSongs() {
+      const res = await fetch(sheetURL);
+      const data = await res.json();
+      const entries = data.feed.entry;
+      const songList = document.getElementById("songList");
+      songList.innerHTML = "";
+
+      if (!entries) return;
+
+      entries.forEach(entry => {
+        const name = entry['gsx$songname']?.$t;
+        const artist = entry['gsx$artist']?.$t;
+        const votes = entry['gsx$votecount']?.$t;
+        const id = entry['gsx$songid']?.$t;
+
+        const div = document.createElement("div");
+        div.className = "song";
+        div.innerHTML = `
+          <strong>${name}</strong> by ${artist}<br/>
+          Votes: ${votes}
+          <button class="vote-btn" onclick="vote('${id}')">👍 Vote</button>
+        `;
+        songList.appendChild(div);
+      });
+    }
+
+    loadSongs(); // initial load
+  </script>
+</body>
+</html>
