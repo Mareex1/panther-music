@@ -1,137 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Panther Lounge Music Request</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panther Lounge - Music Request</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  </head>
+  <body class="bg-[#18391a] text-white min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-[#1f2f20] rounded-lg p-6 shadow-lg">
+      <h1 class="text-2xl font-bold mb-4 text-center text-[#ebd9a8]">🎶 Request a Song</h1>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com "></script>
+      <form id="musicForm" class="space-y-4 text-left" action="https://formspree.io/f/xqaqdpwg" method="POST">
+        <!-- Table Selection -->
+        <div>
+          <label for="tableSelect" class="block text-[#ebd9a8] mb-1">Select Your Table</label>
+          <select id="tableSelect" name="table" required
+            class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]">
+            <option value="">-- Choose Table --</option>
+            <option value="Table 1">Table 1</option>
+            <option value="Table 2">Table 2</option>
+            <option value="Table 3">Table 3</option>
+            <option value="Table 4">Table 4</option>
+            <option value="Table 5">Table 5</option>
+            <option value="Table 6">Table 6</option>
+            <option value="Table 7">Table 7</option>
+            <option value="Table 8">Table 8</option>
+            <option value="Table 9">Table 9</option>
+          </select>
+        </div>
 
-  <!-- iziToast CSS for Notifications -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+        <!-- Song Name -->
+        <div>
+          <label for="songName" class="block text-[#ebd9a8] mb-1">Song Name</label>
+          <input type="text" id="songName" name="song" placeholder="Enter song name" required
+            class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]" />
+        </div>
 
-  <style>
-    body {
-      background-image: url('https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ');
-      background-size: cover;
-      background-position: center;
-      font-family: sans-serif;
-    }
-  </style>
-</head>
-<body class="min-h-screen bg-[#ebd9a8] text-[#18391a] flex items-center justify-center p-4">
+        <!-- Artist Name -->
+        <div>
+          <label for="artistName" class="block text-[#ebd9a8] mb-1">Artist Name (Optional)</label>
+          <input type="text" id="artistName" name="artist" placeholder="Enter artist name"
+            class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]" />
+        </div>
 
-  <div class="bg-[#18391a]/70 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl max-w-md w-full mx-auto text-center">
-
-    <!-- Logo -->
-    <div class="mb-4">
-      <img src="https://raw.githubusercontent.com/yourusername/your-repo-name/main/path/to/logo.png" alt="Panther Lounge Logo" class="mx-auto h-16 w-auto">
+        <!-- Submit Button -->
+        <button type="submit"
+          class="w-full bg-[#18391a] text-[#ebd9a8] py-2 rounded-md hover:bg-[#28552d] transition-colors">
+          Send Request
+        </button>
+      </form>
     </div>
-
-    <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-[#ebd9a8]">Panther Lounge Music Request</h1>
-    <p class="mb-6 text-sm sm:text-base text-[#ebd9a8]">Choose your table and drop your favorite song.</p>
-
-    <!-- Form -->
-    <form id="musicForm" class="space-y-4 text-left">
-      
-      <!-- Table Selection -->
-      <div>
-        <label for="tableSelect" class="block text-[#ebd9a8] mb-1">Select Your Table</label>
-        <select id="tableSelect" required
-          class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]">
-          <option value="">-- Choose Table --</option>
-          <option value="Table 1">Table 1</option>
-          <option value="Table 2">Table 2</option>
-          <option value="Table 3">Table 3</option>
-          <option value="Table 4">Table 4</option>
-          <option value="Table 5">Table 5</option>
-          <option value="Table 6">Table 6</option>
-          <option value="Table 7">Table 7</option>
-          <option value="Table 8">Table 8</option>
-          <option value="Table 9">Table 9</option>
-        </select>
-      </div>
-
-      <!-- Song Name -->
-      <div>
-        <label for="songName" class="block text-[#ebd9a8] mb-1">Song Name</label>
-        <input type="text" id="songName" placeholder="Enter song name" required
-          class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]" />
-      </div>
-
-      <!-- Artist Name -->
-      <div>
-        <label for="artistName" class="block text-[#ebd9a8] mb-1">Artist Name (Optional)</label>
-        <input type="text" id="artistName" placeholder="Enter artist name"
-          class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]" />
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit"
-        class="w-full bg-[#18391a] text-[#ebd9a8] py-2 rounded-md hover:bg-[#28552d] transition-colors">
-        Send Request
-      </button>
-    </form>
-
-    <!-- Success Message -->
-    <div id="successMessage" class="hidden mt-6 text-[#ebd9a8]">
-      ✅ Your song request has been received!<br/>
-      Thanks for setting the vibe.
-    </div>
-
-  </div>
-
-  <!-- iziToast JS -->
-  <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
-
-  <!-- JavaScript Logic -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("musicForm");
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const table = document.getElementById("tableSelect").value;
-        const song = document.getElementById("songName").value.trim();
-        const artist = document.getElementById("artistName").value.trim();
-
-        if (!song || !table) {
-          iziToast.error({
-            title: 'Error',
-            message: 'Please enter a song name and select a table.',
-            position: 'topCenter'
-          });
-          return;
-        }
-
-        const scriptId = "AKfycbzYBUy424rsbNWx34pdXtWzfHcQzrISzkCmdNLxtXEy3aQjnY8Welkgyoduk5XdpAHQDg";
-        fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ table, song, artist })
-        })
-        .then(() => {
-          iziToast.success({
-            title: 'Sent!',
-            message: `Request for ${table} has been sent.`,
-            position: 'topCenter'
-          });
-
-          form.style.display = "none";
-          document.getElementById("successMessage").classList.remove("hidden");
-        })
-        .catch(err => {
-          iziToast.error({
-            title: 'Error',
-            message: 'Failed to send request.',
-            position: 'topCenter'
-          });
-          console.error(err);
-        });
-      });
-    });
-  </script>
-</body>
+  </body>
 </html>
