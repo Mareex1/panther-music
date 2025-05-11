@@ -6,14 +6,14 @@
   <title>Panther Lounge Music Request</title>
 
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com "></script>
 
   <!-- iziToast CSS for Notifications -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
 
   <style>
     body {
-      background-image: url('https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-image: url('https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ');
       background-size: cover;
       background-position: center;
       font-family: sans-serif;
@@ -26,7 +26,7 @@
 
     <!-- Logo -->
     <div class="mb-4">
-      <img src="https://via.placeholder.com/100x100.png?text=Panther+Logo" alt="Panther Lounge Logo" class="mx-auto h-16 w-auto">
+      <img src="https://raw.githubusercontent.com/yourusername/your-repo-name/main/path/to/logo.png" alt="Panther Lounge Logo" class="mx-auto h-16 w-auto">
     </div>
 
     <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-[#ebd9a8]">Panther Lounge Music Request</h1>
@@ -106,28 +106,21 @@
           return;
         }
 
-        // Your working Google Apps Script Deployment URL
-        const url = "https://script.google.com/macros/s/AKfycbzYBUy424rsbNWx34pdXtWzfHcQzrISzkCmdNLxtXEy3aQjnY8Welkgyoduk5XdpAHQDg/exec";
-
-        fetch(url, {
+        const scriptId = "AKfycbzYBUy424rsbNWx34pdXtWzfHcQzrISzkCmdNLxtXEy3aQjnY8Welkgyoduk5XdpAHQDg";
+        fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ table, song, artist })
         })
-        .then(res => res.json())
-        .then(response => {
-          if (response.result === "success") {
-            iziToast.success({
-              title: 'Sent!',
-              message: `Request for ${table} has been sent.`,
-              position: 'topCenter'
-            });
+        .then(() => {
+          iziToast.success({
+            title: 'Sent!',
+            message: `Request for ${table} has been sent.`,
+            position: 'topCenter'
+          });
 
-            form.style.display = "none";
-            document.getElementById("successMessage").classList.remove("hidden");
-          } else {
-            throw new Error("Server error");
-          }
+          form.style.display = "none";
+          document.getElementById("successMessage").classList.remove("hidden");
         })
         .catch(err => {
           iziToast.error({
