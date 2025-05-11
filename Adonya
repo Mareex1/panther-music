@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panther Lounge - Music Request</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  </head>
+  <body class="bg-[#18391a] text-white min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-[#1f2f20] rounded-lg p-6 shadow-lg">
+      <h1 class="text-2xl font-bold mb-4 text-center text-[#ebd9a8]">🎶 Request a Song</h1>
+
+      <form id="musicForm" class="space-y-4 text-left" action="https://formspree.io/f/xqaqdpwg" method="POST">
+        <!-- Table Selection -->
+        <div>
+          <label for="tableSelect" class="block text-[#ebd9a8] mb-1">Select Your Table</label>
+          <select id="tableSelect" name="table" required
+            class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]">
+            <option value="">-- Choose Table --</option>
+            <option value="Table 1">Table 1</option>
+            <option value="Table 2">Table 2</option>
+            <option value="Table 3">Table 3</option>
+            <option value="Table 4">Table 4</option>
+            <option value="Table 5">Table 5</option>
+            <option value="Table 6">Table 6</option>
+            <option value="Table 7">Table 7</option>
+            <option value="Table 8">Table 8</option>
+            <option value="Table 9">Table 9</option>
+          </select>
+        </div>
+
+        <!-- Song Name -->
+        <div>
+          <label for="songName" class="block text-[#ebd9a8] mb-1">Song Name</label>
+          <input type="text" id="songName" name="song" placeholder="Enter song name" required
+            class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]" />
+        </div>
+
+        <!-- Artist Name -->
+        <div>
+          <label for="artistName" class="block text-[#ebd9a8] mb-1">Artist Name (Optional)</label>
+          <input type="text" id="artistName" name="artist" placeholder="Enter artist name"
+            class="w-full bg-[#ebd9a8] text-[#18391a] px-3 py-2 rounded-md border-none focus:ring-2 focus:ring-[#28552d]" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+          class="w-full bg-[#18391a] text-[#ebd9a8] py-2 rounded-md hover:bg-[#28552d] transition-colors">
+          Send Request
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
